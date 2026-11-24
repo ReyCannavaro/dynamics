@@ -6,6 +6,7 @@ import '../../core/theme.dart';
 import '../../models/song.dart';
 import '../../providers/player_provider.dart';
 import '../widgets/album_art_image.dart';
+import 'lyrics_screen.dart';
 
 /// Full-screen Spotify-styled Now Playing player screen
 class PlayerScreen extends StatefulWidget {
@@ -339,15 +340,13 @@ class _PlayerScreenState extends State<PlayerScreen> {
             ),
           ],
         ),
-        // Lyrics shortcut placeholder (expands in Stage 6)
+        // Lyrics shortcut button (opens Stage 6 Karaoke view)
         InkWell(
           borderRadius: DynamicsTheme.radiusCard,
           onTap: () {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text('Lyrics engine is coming in Stage 6! 🎤'),
-                duration: Duration(seconds: 1),
-                backgroundColor: DynamicsTheme.darkSurface,
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => LyricsScreen(song: song),
               ),
             );
           },
@@ -359,12 +358,12 @@ class _PlayerScreenState extends State<PlayerScreen> {
             ),
             child: const Row(
               children: [
-                Icon(Icons.lyrics_outlined, size: 14, color: DynamicsTheme.textMuted),
+                Icon(Icons.lyrics_outlined, size: 14, color: DynamicsTheme.spotifyGreen),
                 SizedBox(width: 6),
                 Text(
                   'LYRICS',
                   style: TextStyle(
-                    color: DynamicsTheme.textMuted,
+                    color: DynamicsTheme.spotifyGreen,
                     fontSize: 11,
                     fontWeight: FontWeight.w700,
                     letterSpacing: 1.0,

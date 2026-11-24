@@ -5,7 +5,6 @@ import 'package:provider/provider.dart';
 import 'package:dynamics/core/theme.dart';
 import 'package:dynamics/models/song.dart';
 import 'package:dynamics/services/storage_service.dart';
-import 'package:dynamics/services/metadata_service.dart';
 import 'package:dynamics/providers/player_provider.dart';
 import 'package:dynamics/ui/screens/player_screen.dart';
 
