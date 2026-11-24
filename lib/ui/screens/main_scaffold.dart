@@ -7,6 +7,7 @@ import '../widgets/mini_player.dart';
 import 'home_screen.dart';
 import 'search_screen.dart';
 import 'profile_screen.dart';
+import 'player_screen.dart';
 
 /// Main navigation scaffold holding BottomNavigationBar and floating MiniPlayer
 class MainScaffold extends StatefulWidget {
@@ -24,6 +25,26 @@ class _MainScaffoldState extends State<MainScaffold> {
     SearchScreen(),
     ProfileScreen(),
   ];
+
+  void _openFullPlayer() {
+    Navigator.of(context).push(
+      PageRouteBuilder(
+        opaque: false,
+        pageBuilder: (context, animation, secondaryAnimation) => const PlayerScreen(),
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          final tween = Tween<Offset>(
+            begin: const Offset(0.0, 1.0),
+            end: Offset.zero,
+          ).chain(CurveTween(curve: Curves.easeOutCubic));
+
+          return SlideTransition(
+            position: animation.drive(tween),
+            child: child,
+          );
+        },
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,16 +71,7 @@ class _MainScaffoldState extends State<MainScaffold> {
                 song: currentSong,
                 isPlaying: player.isPlaying,
                 progress: player.progress,
-                onTap: () {
-                  // Full player modal / screen will be wired in Stage 5
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text('Now Playing: ${currentSong.title}'),
-                      duration: const Duration(seconds: 1),
-                      backgroundColor: DynamicsTheme.darkSurface,
-                    ),
-                  );
-                },
+                onTap: _openFullPlayer,
                 onPlayPause: () => player.togglePlayPause(),
                 onToggleFavorite: () => player.toggleFavorite(),
               ),
