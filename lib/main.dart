@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'core/theme.dart';
 import 'providers/library_provider.dart';
 import 'providers/player_provider.dart';
+import 'providers/profile_provider.dart';
 import 'services/audio_player_service.dart';
 import 'services/storage_service.dart';
 import 'ui/screens/main_scaffold.dart';
@@ -38,6 +39,7 @@ class DynamicsApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => LibraryProvider()),
         ChangeNotifierProvider(create: (_) => PlayerProvider()),
+        ChangeNotifierProvider(create: (_) => ProfileProvider()),
       ],
       child: MaterialApp(
         title: 'Dynamics',
